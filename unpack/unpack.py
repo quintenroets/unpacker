@@ -24,7 +24,7 @@ def unpack(folder):
                     new_parent = path.parent / path.stem
                     new_parent.mkdir(parents=True, exist_ok=True)
                     path = path.rename(new_parent / path.name)
-                    Cli.run(f"cd {new_parent}", f"{command} '{path}'")
+                    Cli.run(f"{command} '{path}'", pwd=new_parent)
                     path.unlink()
 
 def map_to_unique(path: Path):
