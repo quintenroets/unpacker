@@ -1,9 +1,9 @@
 import os
+from path import Path
 import sys
 
 from libs.cli import Cli
 from libs.errorhandler import ErrorHandler
-from libs.path import Path
 from libs.progressbar import ProgressBar
 
 commands = {
