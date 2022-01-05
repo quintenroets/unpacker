@@ -27,22 +27,21 @@ def unpack(folder):
                     Cli.run(f"{command} '{path}'", pwd=new_parent)
                     path.unlink()
 
-def map_to_unique(path: Path):
-    return path.stem.split(" (")[0] + path.suffix
 
 def undouble(folder: Path):
     name_mapper = {}
     
     for path in folder.iterdir():
         if path.is_file():
-            key = map_to_unique(path)
+            key = path.stem.split(" (")[0] + path.suffix
             name_mapper[key] = name_mapper.get(key, []) + [path]
 
     for unique, paths in name_mapper.items():
-        paths = sorted(paths, key=lambda path: -path.stat().st_mtime)
+        paths = sorted(paths, key=lambda path: -path.mtime())
         Cli.run(f'gio trash "{p}"' for p in paths[1:])
 
         paths[0].rename(folder / unique)
+
 
 def main():
     with ErrorHandler():
