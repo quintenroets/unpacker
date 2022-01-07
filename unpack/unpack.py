@@ -37,7 +37,7 @@ def undouble(folder: Path):
             name_mapper[key] = name_mapper.get(key, []) + [path]
 
     for unique, paths in name_mapper.items():
-        paths = sorted(paths, key=lambda path: -path.mtime())
+        paths = sorted(paths, key=lambda path: -path.mtime)
         Cli.run(f'gio trash "{p}"' for p in paths[1:])
 
         paths[0].rename(folder / unique)
