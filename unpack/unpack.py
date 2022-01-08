@@ -1,4 +1,3 @@
-import os
 from plib import Path
 import sys
 
@@ -6,14 +5,14 @@ from libs.cli import Cli
 from libs.errorhandler import ErrorHandler
 from libs.progressbar import ProgressBar
 
-commands = {
-    "unzip -q -o": ["zip"],
-    "7za e": ["7z"],
-    "tar -xf": ["gz", "tgz", "tar"],
-    "unoconv -f pdf": ["pptx", "docx"]
-}
 
 def unpack(folder):
+    commands = {
+        "unzip -q -o": ["zip"],
+        "7za e": ["7z"],
+        "tar -xf": ["gz", "tgz", "tar"],
+        "unoconv -f pdf": ["pptx", "docx"]
+    }
     command_mapper = {ext: cmd for cmd, exts in commands.items() for ext in exts}
     
     for path in folder.iterdir():
@@ -45,9 +44,10 @@ def undouble(folder: Path):
 
 def main():
     with ErrorHandler():
-        folder = Path(os.getcwd()) if sys.stdin.isatty() else Path.docs
+        folder = Path.cwd() if sys.stdin.isatty() else Path.docs
         unpack(folder)
         undouble(folder)
+
 
 if __name__ == "__main__":
     main()
