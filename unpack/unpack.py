@@ -23,7 +23,7 @@ def unpack(folder):
                     new_parent = path.parent / path.stem
                     new_parent.mkdir(parents=True, exist_ok=True)
                     path = path.rename(new_parent / path.name)
-                    Cli.run(f"{command} '{path}'", pwd=new_parent)
+                    Cli.run(f"{command} '{path}'", cwd=new_parent)
                     path.unlink()
 
 
