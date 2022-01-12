@@ -1,8 +1,8 @@
-from plib import Path
+import cli
 import sys
+from plib import Path
 
-from libs.cli import Cli
-from libs.errorhandler import ErrorHandler
+
 from libs.progressbar import ProgressBar
 
 
@@ -23,7 +23,7 @@ def unpack(folder):
                     new_parent = path.parent / path.stem
                     new_parent.mkdir(parents=True, exist_ok=True)
                     path = path.rename(new_parent / path.name)
-                    Cli.run(f"{command} '{path}'", cwd=new_parent)
+                    cli.run(f'{command} "{path}"', cwd=new_parent)
                     path.unlink()
 
 
@@ -37,13 +37,14 @@ def undouble(folder: Path):
 
     for unique, paths in name_mapper.items():
         paths = sorted(paths, key=lambda path: -path.mtime)
-        Cli.run(f'gio trash "{p}"' for p in paths[1:])
+        for path in paths[1:]:
+            cli.run(f'gio trash "{path}"')
 
         paths[0].rename(folder / unique)
 
 
 def main():
-    with ErrorHandler():
+    with cli.errorhandler():
         folder = Path.cwd() if sys.stdin.isatty() else Path.docs
         unpack(folder)
         undouble(folder)
