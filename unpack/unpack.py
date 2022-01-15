@@ -23,7 +23,7 @@ def unpack(folder):
                     new_parent = path.parent / path.stem
                     new_parent.mkdir(parents=True, exist_ok=True)
                     path = path.rename(new_parent / path.name)
-                    cli.run(f'{command} "{path}"', cwd=new_parent)
+                    cli.run(command, path, cwd=new_parent)
                     path.unlink()
 
 
@@ -38,7 +38,7 @@ def undouble(folder: Path):
     for unique, paths in name_mapper.items():
         paths = sorted(paths, key=lambda path: -path.mtime)
         for path in paths[1:]:
-            cli.run(f'gio trash "{path}"')
+            cli.run('gio trash', path)
 
         paths[0].rename(folder / unique)
 
