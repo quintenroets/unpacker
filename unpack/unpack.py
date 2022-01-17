@@ -44,10 +44,9 @@ def undouble(folder: Path):
 
 
 def main():
-    with cli.errorhandler():
-        folder = Path.cwd() if sys.stdin.isatty() else Path.docs
-        unpack(folder)
-        undouble(folder)
+    folder = Path.cwd() if sys.stdin.isatty() else Path.docs
+    unpack(folder)
+    undouble(folder)
 
 
 if __name__ == '__main__':
