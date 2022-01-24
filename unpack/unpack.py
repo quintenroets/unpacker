@@ -1,7 +1,6 @@
 import sys
 
 import cli
-from libs.progressbar import ProgressBar
 from plib import Path
 
 
@@ -18,12 +17,11 @@ def unpack(folder):
         if path.is_file():
             command = command_mapper.get(path.suffix[1:])
             if command:
-                with ProgressBar("Unpacking.."):
-                    new_parent = path.parent / path.stem
-                    new_parent.mkdir(parents=True, exist_ok=True)
-                    path = path.rename(new_parent / path.name)
-                    cli.run(command, path, cwd=new_parent)
-                    path.unlink()
+                new_parent = path.parent / path.stem
+                new_parent.mkdir(parents=True, exist_ok=True)
+                path = path.rename(new_parent / path.name)
+                cli.run(command, path, cwd=new_parent)
+                path.unlink()
 
 
 def undouble(folder: Path):
