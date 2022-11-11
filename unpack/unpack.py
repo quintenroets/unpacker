@@ -6,14 +6,13 @@ from plib import Path
 
 def unpack(folder):
     commands = {
-        "unzip -q -o": ["zip"],
         "7za e": ["7z"],
-        "tar -xf": ["gz", "tgz", "tar"],
         "unoconv -f pdf": ["pptx", "docx"],
     }
     command_mapper = {ext: cmd for cmd, exts in commands.items() for ext in exts}
 
     for path in folder.iterdir():
+        path.unpack_if_archive()
         if path.is_file():
             command = command_mapper.get(path.suffix[1:])
             if command:
