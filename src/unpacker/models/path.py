@@ -1,13 +1,28 @@
-from functools import cached_property
+from __future__ import annotations
+
+import typing
 from typing import TypeVar
 
 import superpathlib
+from simple_classproperty import classproperty
 
 T = TypeVar("T", bound="Path")
 
 
 class Path(superpathlib.Path):
-    @cached_property
-    def with_clean_name(self: T) -> T:
-        clean_stem = self.stem.split(" (")[0]
-        return self.with_stem(clean_stem)
+    @classmethod
+    @classproperty
+    def source_root(cls: type[T]) -> T:
+        return cls(__file__).parent.parent
+
+    @classmethod
+    @classproperty
+    def assets(cls: type[T]) -> T:
+        path = cls.script_assets / cls.source_root.name
+        return typing.cast(T, path)
+
+    @classmethod
+    @classproperty
+    def config(cls: type[T]) -> T:
+        path = cls.assets / "config" / "config.yaml"
+        return typing.cast(T, path)
