@@ -1,6 +1,6 @@
 [project]
 name = "unpacker"
-version = "0.1.0"
+version = "0.1.1"
 description = "Clean up and unpack items in working directory"
 authors = [{name = "Quinten Roets", email = "qdr2104@columbia.edu"}]
 license = {text = "MIT"}
@@ -8,7 +8,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "package-utils >=0.6.1, <1",
-    "quinten-cli >=1.1.16, <2",
+    "powercli >=0.1.1, <1",
     "superpathlib >=2.0.2, <3",
 ]
 
