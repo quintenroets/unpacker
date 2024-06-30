@@ -6,7 +6,7 @@ from functools import cached_property
 
 import cli
 
-from ..models import Path
+from unpacker.models import Path
 
 
 @dataclass

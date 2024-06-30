@@ -8,7 +8,7 @@ from unpacker.main.main import Unpacker
 from unpacker.models import Path
 
 disable_function_scoped_fixture_check = settings(
-    suppress_health_check=(HealthCheck.function_scoped_fixture,)
+    suppress_health_check=(HealthCheck.function_scoped_fixture,),
 )
 
 
@@ -20,7 +20,7 @@ def test_main(folder: Path) -> None:
 @patch("cli.run")
 @disable_function_scoped_fixture_check
 @given(name=strategies.text(alphabet=string.ascii_letters))
-def test_remove_duplicates(_: MagicMock, folder: Path, name: str) -> None:
+def test_remove_duplicates(_: MagicMock, folder: Path, name: str) -> None:  # noqa: PT019
     create_duplicates(folder, name)
     unpacker = Unpacker(folder)
     unpacker.run()
