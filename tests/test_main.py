@@ -20,7 +20,9 @@ def test_main(folder: Path) -> None:
 @patch("cli.run")
 @disable_function_scoped_fixture_check
 @given(name=strategies.text(alphabet=string.ascii_letters))
-def test_remove_duplicates(_: MagicMock, folder: Path, name: str) -> None:  # noqa: PT019
+def test_remove_duplicates(
+    _: MagicMock, folder: Path, name: str
+) -> None:  # noqa: PT019
     create_duplicates(folder, name)
     unpacker = Unpacker(folder)
     unpacker.run()
