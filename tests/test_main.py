@@ -4,6 +4,7 @@ import zipfile
 from unittest.mock import MagicMock, patch
 
 from hypothesis import HealthCheck, given, settings, strategies
+
 from unpacker.main.main import Unpacker
 from unpacker.models import Path
 
