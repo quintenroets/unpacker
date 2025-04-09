@@ -43,7 +43,7 @@ class UnpackAction:
 
 
 def extract_path() -> Path:
-    return Path.cwd() if sys.stdin.isatty() else typing.cast(Path, Path.docs)
+    return Path.cwd() if sys.stdin.isatty() else typing.cast("Path", Path.docs)
 
 
 @dataclass
