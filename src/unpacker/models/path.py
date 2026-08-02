@@ -1,10 +1,7 @@
 from functools import cached_property
-from typing import TypeVar
+from typing import Self
 
 import superpathlib
-from typing_extensions import Self
-
-T = TypeVar("T", bound="Path")
 
 
 class Path(superpathlib.Path):

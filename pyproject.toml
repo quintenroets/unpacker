@@ -5,7 +5,7 @@ description = "Clean up and unpack items in working directory"
 authors = [{name = "Quinten Roets", email = "qdr2104@columbia.edu"}]
 license = "MIT"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "package-utils >=0.8.3, <1",
     "powercli >=0.4.0, <1",
